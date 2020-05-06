@@ -38,4 +38,9 @@ todo check if there is a jenkins plugin to use ssh repo url
 add git credentials https://www.jenkins.io/doc/book/using/using-credentials/ & https://plugins.jenkins.io/credentials/ & https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc
 ![add git credentials](img/jenkins-add-cred.PNG)
 set build triggers
-![set build triggers](jenkins-build-trigger.PNG)
+![set build triggers](img/jenkins-build-trigger.PNG)
+build script [jenkinsbuild.sh](jenkinsbuild.sh)
+![set build script](img/jenkins-build-script.PNG)
+post build action  (email, needs to be local as system is not set to use an smtp relay/server
+![set post build action](img/jenkins-post-build-action.PNG)
+
