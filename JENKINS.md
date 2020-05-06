@@ -40,7 +40,18 @@ add git credentials https://www.jenkins.io/doc/book/using/using-credentials/ & h
 set build triggers
 ![set build triggers](img/jenkins-build-trigger.PNG)
 build script [jenkinsbuild.sh](jenkinsbuild.sh)
+__note__ I had to add userid jenkins to the group docker (& restart the service)
+```
+tricia@acerubuntu1804:~/ecq/springboot-java$ sudo usermod jenkins -G docker
+[sudo] password for tricia:
+tricia@acerubuntu1804:~/ecq/springboot-java$ grep jenkins /etc/group
+docker:x:999:tricia,dockert,jenkins
+jenkins:x:132:
+tricia@acerubuntu1804:~/ecq/springboot-java$ id jenkins
+uid=127(jenkins) gid=132(jenkins) groups=132(jenkins),999(docker)
+```
 ![set build script](img/jenkins-build-script.PNG)
+
 post build action  (email, needs to be local as system is not set to use an smtp relay/server
 ![set post build action](img/jenkins-post-build-action.PNG)
 
