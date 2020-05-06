@@ -3,6 +3,8 @@
 Original is here https://github.com/campbe13/docker-ecq2020/tree/master/springboot-java
 
 Using this repo for a CI/CD lab, so it has to be in it's own repo here
+
+See cu.cd [using jenkins](JENKINS.md)
 ## app info
 This is an hello world type of app, not complex. 
 
