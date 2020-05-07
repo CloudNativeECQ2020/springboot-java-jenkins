@@ -4,9 +4,13 @@ Jenkins listens by default on port 8080
 
 Following https://dzone.com/articles/learn-how-to-setup-a-cicd-pipeline-from-scratch
 1. [start jenkins](#start-jenkins-service)
+1. [set up pipeline](#set-up-pipeline)
+
+
+original test
 1. [load jenkins port 8080](#load-jenkins)
-1. [start jenkins](#start-jenkins)
-1. [start jenkins](#start-jenkins)
+1. [create a project w jenkins](#create-&-configure-project)
+
 ## start jenkins service
 First `systemctl start jenkins`
 ```
@@ -27,9 +31,24 @@ May 01 21:34:42 acerubuntu1804 su[1968]: pam_unix(su:session): session opened fo
 May 01 21:34:44 acerubuntu1804 jenkins[1399]:    ...done.
 May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot time.
 ```
+## set up pipeline
+1. load the web page
+2. set up build for the app (maven)   `springboot-1-build`
+     1. repo https://github.com/CloudNativeECQ2020/springboot-java-jenkins.git
+     2. set up github creds (not sure where used
+     3. tested build, works  (run build on project page
+3.  set up trigger for the build (GIT scm trigger)  (webhook)  https://developer.github.com/webhooks/
+     1. Go to your project repository.
+     2. Go to "settings" in the right corner.
+     3. Click on "webhooks."
+     4. Click "Add webhooks."
+     5. stopping here, need to move jenkins to korra (?) so that it can be accessed by github via url  todo see [jenkins on korra](jenkinsonkorra.md)
+     
+# original test
 ## load jenkins
 load the web page
 ![load web page](img/jenkins1.PNG)
+## create & configure project 
 create the project (freestyle)
 ![create the project](img/jenkins-create-job.PNG)
 set up the git repo (must use https)
@@ -52,7 +71,7 @@ uid=127(jenkins) gid=132(jenkins) groups=132(jenkins),999(docker)
 ```
 ![set build script](img/jenkins-build-script.PNG)
 
-post build action  (email, needs to be local as system is not set to use an smtp relay/server)
+set post build action  (email, needs to be local as system is not set to use an smtp relay/server)
 todo set up ubuntu to use google as an smtp relay / server (sendmail or postfix)  for jenkins
 ![set post build action](img/jenkins-post-build-action.PNG)
 set up a trigger to jenkins on github

@@ -24,9 +24,11 @@ runapp: ## run the app, locally for testing
 
 run-fg:  ## run the container logs to stdout
 	docker run -p $(HOST_PORT):$(CONTAINER_PORT) --name $(RUN_NAME)  $(CONTAINER_IMAGE)
+	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 
 run:  ## run the container detached (~in the background )
 	docker run -d -p $(HOST_PORT):$(CONTAINER_PORT) --name $(RUN_NAME)  $(CONTAINER_IMAGE)
+	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 	docker ps 
 
 sh:	shell  ## use shell
