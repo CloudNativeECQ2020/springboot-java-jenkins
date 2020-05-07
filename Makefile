@@ -27,6 +27,11 @@ run-fg:  ## run the container logs to stdout
 	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 
 run:  ## run the container detached (~in the background )
+	RUNNING=$(docker inspect  --format="{{ .State.Running }}"  $(RUN_NAME))  
+ifneq ($(RUNNING), 1) 
+	docker stop $(RUN_NAME)
+	docker rm $(RUN_NAME)
+endif
 	docker run -d -p $(HOST_PORT):$(CONTAINER_PORT) --name $(RUN_NAME)  $(CONTAINER_IMAGE)
 	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 	docker ps 
