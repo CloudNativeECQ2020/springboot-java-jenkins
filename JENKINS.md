@@ -43,6 +43,8 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
      3. Click on "webhooks."
      4. Click "Add webhooks."
      5. stopping here, need to move jenkins to korra (?) so that it can be accessed by github via url  todo see [jenkins on korra](jenkinsonkorra.md)
+4. set up the build for docker  `springboot-2-dockerize`
+
      
 # original test
 ## load jenkins

@@ -1,9 +1,9 @@
 #!/bin/bash
-# build script for jenkins
+# run script for the container
 # uses make & Makefile
 # pmcampbell
 # 2020-05-06
 
-# build the app maven compile
-make maven
+# run the container image
+make run
 
