@@ -52,6 +52,9 @@ uid=127(jenkins) gid=132(jenkins) groups=132(jenkins),999(docker)
 ```
 ![set build script](img/jenkins-build-script.PNG)
 
-post build action  (email, needs to be local as system is not set to use an smtp relay/server
+post build action  (email, needs to be local as system is not set to use an smtp relay/server)
+todo set up ubuntu to use google as an smtp relay / server (sendmail or postfix)  for jenkins
 ![set post build action](img/jenkins-post-build-action.PNG)
+set up a trigger to jenkins on github
+
 

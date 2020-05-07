@@ -4,7 +4,7 @@ Original is here https://github.com/campbe13/docker-ecq2020/tree/master/springbo
 
 Using this repo for a CI/CD lab, so it has to be in it's own repo here
 
-See cu.cd [using jenkins](JENKINS.md)
+See [using jenkins](JENKINS.md) for the process
 ## app info
 This is an hello world type of app, not complex. 
 
