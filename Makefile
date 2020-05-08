@@ -28,8 +28,9 @@ run-fg:  ## run the container logs to stdout
 
 # returns true if found (0) and false if not found (1) 
 # $(shell (docker ps | grep -q ${NAME}; echo $$?))
-run:  ## run the container detached (~in the background )	
-ifneq ( $(shell (docker ps | grep -q ${NAME}; echo $$?)) , 1 ) 
+run:  ## run the container detached (~in the background )
+	ISRUNNING=$(shell docker ps | grep  ${NAME})
+ifdef ISRUNNING
 	@echo stopping running container
 	docker stop $(NAME)
 	docker rm $(NAME)
@@ -66,11 +67,11 @@ check:  ## check docker run time
 publish:  ## publish to docker hub (interactive)  
 	@echo publish to  docker hub, interactive 
 	@echo be sure to tag it first with my repo tricia/imagename
-        ifdef DOCKER_USER
-		docker login   -u $(DOCKER_USER)
-        else
-		docker login 
-        endif
+ifdef DOCKER_USER
+	docker login   -u $(DOCKER_USER)
+else
+	docker login 
+endif
 	docker tag ${NAME} ${HUBUSER}/${NAME}:${VERSION}
 
 	docker image push $(NAME):latest
