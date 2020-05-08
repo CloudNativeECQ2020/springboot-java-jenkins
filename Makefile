@@ -26,9 +26,11 @@ run-fg:  ## run the container logs to stdout
 	docker run -p $(HOST_PORT):$(CONTAINER_PORT) --name $(NAME)  $(NAME)
 	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 
-run:  ## run the container detached (~in the background )
-	RUNNING=$(docker inspect  --format="{{ .State.Running }}"  $(NAME))  
-ifneq ($(RUNNING), 1) 
+# returns true if found (0) and false if not found (1) 
+# $(shell (docker ps | grep -q ${NAME}; echo $$?))
+run:  ## run the container detached (~in the background )	
+ifneq ( $(shell (docker ps | grep -q ${NAME}; echo $$?)) , 1 ) 
+	@echo stopping running container
 	docker stop $(NAME)
 	docker rm $(NAME)
 endif
@@ -36,7 +38,7 @@ endif
 	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 	docker ps 
 
-sh:	shell  ## use shell
+sh:	shell  ##  shell into the container
 shell:  ## shell into the container
 	docker exec -ti $(NAME)  sh
 
