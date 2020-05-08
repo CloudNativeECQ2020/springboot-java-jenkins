@@ -17,37 +17,37 @@ maven: ## build the app (maven)
 	mvn package
 
 build: ## build container image from Dockerfile
-	docker build -t $(CONTAINER_IMAGE) .
+	docker build -t $(NAME) .
 
 runapp: ## run the app, locally for testing
 	java --jar target/*.jar
 
 run-fg:  ## run the container logs to stdout
-	docker run -p $(HOST_PORT):$(CONTAINER_PORT) --name $(RUN_NAME)  $(CONTAINER_IMAGE)
+	docker run -p $(HOST_PORT):$(CONTAINER_PORT) --name $(NAME)  $(NAME)
 	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 
 run:  ## run the container detached (~in the background )
-	RUNNING=$(docker inspect  --format="{{ .State.Running }}"  $(RUN_NAME))  
+	RUNNING=$(docker inspect  --format="{{ .State.Running }}"  $(NAME))  
 ifneq ($(RUNNING), 1) 
-	docker stop $(RUN_NAME)
-	docker rm $(RUN_NAME)
+	docker stop $(NAME)
+	docker rm $(NAME)
 endif
-	docker run -d -p $(HOST_PORT):$(CONTAINER_PORT) --name $(RUN_NAME)  $(CONTAINER_IMAGE)
+	docker run -d -p $(HOST_PORT):$(CONTAINER_PORT) --name $(NAME)  $(NAME)
 	@echo load the image via a browser http://ip.add.re.ss:${HOST_PORT}
 	docker ps 
 
 sh:	shell  ## use shell
 shell:  ## shell into the container
-	docker exec -ti $(RUN_NAME)  sh
+	docker exec -ti $(NAME)  sh
 
 logs: ## show logs for the containers
-	docker logs -f $(RUN_NAME)
+	docker logs -f $(NAME)
 
 restart: stoprun ## use stop then run
 clean:  stop prune ## use stop then prune
 
 stop: ## stop and remove the containers
-	docker stop $(RUN_NAME) ; docker rm $(RUN_NAME) ; docker ps
+	docker stop $(NAME) ; docker rm $(NAME) ; docker ps
 
 prune:  # clean up unused containers
 	docker system prune -f ; docker images
@@ -69,4 +69,6 @@ publish:  ## publish to docker hub (interactive)
         else
 		docker login 
         endif
-	docker image push $(CONTAINER_IMAGE):latest
+	docker tag ${NAME} ${HUBUSER}/${NAME}:${VERSION}
+
+	docker image push $(NAME):latest

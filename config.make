@@ -1,4 +1,5 @@
-CONTAINER_IMAGE=tricia/springbootj
-RUN_NAME=springbootj
+HUBUSER=tricia
+NAME=springbootj
 HOST_PORT=8222
 CONTAINER_PORT=8080
+VERSION=latest
