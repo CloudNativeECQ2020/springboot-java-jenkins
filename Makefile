@@ -29,8 +29,10 @@ run-fg:  ## run the container logs to stdout
 # returns true if found (0) and false if not found (1) 
 # $(shell (docker ps | grep -q ${NAME}; echo $$?))
 run:  ## run the container detached (~in the background )
-	ISRUNNING=$(shell docker ps | grep  ${NAME})
-ifdef ISRUNNING
+	ISRUNNING=$(shell (docker ps | grep  ${NAME} | cut -f  1 -d " "))
+
+#ifdef $(ISRUNNING)
+ifneq ($(ISRUNNING), "")
 	@echo stopping running container
 	docker stop $(NAME)
 	docker rm $(NAME)
