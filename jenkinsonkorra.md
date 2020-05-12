@@ -4,7 +4,8 @@ java & maven installed
 1. install [repo & key](#repo-&-key)
 1. install [package](#install)
 1. [start & enable](#start-&-enable) the system
-1. cannot load as of now, problems with firewall, opened a ticket with the helpdesk
+1. FIXED cannot load as of now, problems with firewall, opened a ticket with the helpdesk
+1.  see [google doc](https://docs.google.com/document/d/1stFH2Eq3EjCleLTMwAIYoXY0AYmG0QlgW1FxiY8FWoU/edit?usp=sharing) for further steps
 ## repo & key
 ```
 [tricia@korra ~]$ curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
