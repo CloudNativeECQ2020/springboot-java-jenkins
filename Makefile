@@ -70,7 +70,7 @@ check:  ## check docker run time
 
 ecr: ecrauth ecrpublish ## get auth pass & auth to aws  & publish to amazon Amazon Elastic Container Registry 
 ecrauth: ## get auth password & auth with ecr /aws 
-	 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${ECRREPO}
+	 /usr/local/bin/aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${ECRREPO}
 
 ecrpublish: ## publish to amazon Amazon Elastic Container Registry 
 	docker tag ${NAME} ${ECRREPO}/tricia/ecrrepo:latest
