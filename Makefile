@@ -1,8 +1,10 @@
 # makefile to build a container to run firefox
 # pmcampbell
 # 2020-04-16
+# 2020-05-15 add amazon ecr 
 
 include	 config.make
+ECRREPO=016076643457.dkr.ecr.us-east-2.amazonaws.com
 
 # .PHONY used if no options given
 .PHONY: help
@@ -65,6 +67,14 @@ check:  ## check docker run time
 	docker images
 	docker ps
 	docker-compose version
+
+ecr: ecrauth ecrpublish ## get auth pass & auth to aws  & publish to amazon Amazon Elastic Container Registry 
+ecrauth: ## get auth password & auth with ecr /aws 
+	 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${ECRREPO}
+
+ecrpublish: ## publish to amazon Amazon Elastic Container Registry 
+	docker tag ${NAME} ${ECRREPO}/tricia/ecrrepo:latest
+	docker image push ${ECRREPO}/tricia/ecrrepo:latest
 
 publish:  ## publish to docker hub (interactive)  
 	@echo publish to  docker hub, interactive 
