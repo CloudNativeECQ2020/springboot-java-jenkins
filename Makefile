@@ -5,6 +5,7 @@
 
 include	 config.make
 ECRREPO=016076643457.dkr.ecr.us-east-2.amazonaws.com
+ECRIMG=tricia/ecrrepo
 
 # .PHONY used if no options given
 .PHONY: help
@@ -73,8 +74,17 @@ ecrauth: ## get auth password & auth with ecr /aws
 	 /usr/local/bin/aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${ECRREPO}
 
 ecrpublish: ## publish to amazon Amazon Elastic Container Registry 
-	docker tag ${NAME} ${ECRREPO}/tricia/ecrrepo:latest
-	docker image push ${ECRREPO}/tricia/ecrrepo:latest
+	docker tag ${NAME} ${ECRREPO}/${ECRIMAGE:latest
+	docker image push ${ECRREPO}/${ECRIMG}:latest
+
+ecrimage: ## show image in ECR repo
+	aws ecr list-images --region us-east-2  --repository-name ${ECRIMG}
+	aws ecr describe-images --repository-name ${ECRIMG}
+
+
+ecrrepo: ## show ECR repo info
+	aws ecr describe-repositories  
+
 
 publish:  ## publish to docker hub (interactive)  
 	@echo publish to  docker hub, interactive 
