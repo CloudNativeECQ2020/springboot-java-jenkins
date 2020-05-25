@@ -23,7 +23,7 @@ build: ## build container image from Dockerfile
 	docker build -t $(NAME) .
 
 runapp: ## run the app, locally for testing
-	java --jar target/*.jar
+	java -jar target/*.jar
 
 run-fg:  ## run the container logs to stdout
 	docker run -p $(HOST_PORT):$(CONTAINER_PORT) --name $(NAME)  $(NAME)
@@ -74,7 +74,7 @@ ecrauth: ## get auth password & auth with ecr /aws
 	 /usr/local/bin/aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${ECRREPO}
 
 ecrpublish: ## publish to amazon Amazon Elastic Container Registry 
-	docker tag ${NAME} ${ECRREPO}/${ECRIMAGE:latest
+	docker tag ${NAME} ${ECRREPO}/${ECRIMG}:latest
 	docker image push ${ECRREPO}/${ECRIMG}:latest
 
 ecrimage: ## show image in ECR repo
