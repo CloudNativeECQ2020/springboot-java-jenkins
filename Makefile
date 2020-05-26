@@ -6,6 +6,9 @@
 include	 config.make
 ECRREPO=016076643457.dkr.ecr.us-east-2.amazonaws.com
 ECRIMG=tricia/ecrrepo
+ECSTASK=fargate-task
+ECSSERVICE=shakespeare-ec-service
+ECSTASK_REV=1
 
 # .PHONY used if no options given
 .PHONY: help
@@ -84,6 +87,9 @@ ecrimage: ## show image in ECR repo
 
 ecrrepo: ## show ECR repo info
 	aws ecr describe-repositories  
+
+ecsrestart: ## reload the task after image updated
+	aws ecs update-service --cluster default --service ${ECSSERVICE} --task-definition ${ECSTASK}:${ECSTASK_REV} 
 
 
 publish:  ## publish to docker hub (interactive)  

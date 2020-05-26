@@ -23,7 +23,8 @@ public class Application {
 
     return "Hello Docker World coming to you from Spring Boot!<br>Update the repo<br> testing webhook to jenkins<br>"
 		+display_date 
-		+ "<h3>" + getIPHost() + "</h3>";
+		+ "<h3>" + getIPHost() + "</h3>" 
+		+ "<h2> AWS deploy success </h2>";
 
   }
   public static void main(String[] args) {
