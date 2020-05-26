@@ -4,4 +4,4 @@
 # pmcampbell
 # 2020-05-26
 
-make ecsrestar
+make ecsrestart
