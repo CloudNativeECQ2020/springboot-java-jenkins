@@ -9,6 +9,8 @@ ECRIMG=tricia/ecrrepo
 ECSTASK=fargate-task
 ECSSERVICE=shakespeare-ec-service
 ECSTASK_REV=1
+#ECSCLUSTER=default
+ECSCLUSTER=springbootj-fargate
 
 # .PHONY used if no options given
 .PHONY: help
@@ -88,9 +90,22 @@ ecrimage: ## show image in ECR repo
 ecrrepo: ## show ECR repo info
 	aws ecr describe-repositories  
 
-ecsrestart: ## reload the task after image updated
-	aws ecs update-service --cluster default --service ${ECSSERVICE} --task-definition ${ECSTASK}:${ECSTASK_REV} 
+# note different output defaults to json on centos, not ubuntu
+# exact same version, build etc of aws cli
+PARM=$(shell (aws ecs list-tasks --cluster $ECSCLUSTER) --output json| jq -r '.taskArns[]'))
+TASK=$(shell aws ecs list-tasks --cluster ${ECSCLUSTER} --output json| jq -r ".taskArns[]")
+ecsrestart: ## stop  the task after image updated, will auto pull & reload image
+	aws ecs stop-task --cluster $(ECSCLUSTER) --task "${TASK}"
 
+
+#	@echo PARM $(PARM) 
+#	aws ecs stop-task --cluster ${ECSCLUSTER} --task ${PARM}
+#	aws ecs update-service --cluster default --service ${ECSSERVICE} --task-definition ${ECSTASK}:${ECSTASK_REV} 
+
+ecstask: ## describe ecs task
+#	PARM=$(shell (aws ecs list-tasks --cluster ${ECSCLUSTER} --output json| jq -r '.taskArns[]'))
+	@echo PARM $(PARM) 
+	aws ecs describe-tasks --cluster ${ECSCLUSTER} --task ${PARM}
 
 publish:  ## publish to docker hub (interactive)  
 	@echo publish to  docker hub, interactive 
