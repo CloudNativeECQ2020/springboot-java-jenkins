@@ -21,10 +21,11 @@ public class Application {
 	String display_date = "System date: " + dateFormat.format(date);
 
 
-    return "Hello Docker World coming to you from Spring Boot!<br>Update the repo<br> testing webhook to jenkins<br>"
+    return "<h1>Hello Docker World coming to you from Spring Boot+java, in a container!</h1>"
 		+display_date 
 		+ "<h3>" + getIPHost() + "</h3>" 
-		+ "<br><h2> AWS deploy success </h2>";
+		+ "<br><h2> AWS deploy success </h2>"
+		+ "<br><h2> AWS ECR (load image after update) succsess </h2>";
 
   }
   public static void main(String[] args) {

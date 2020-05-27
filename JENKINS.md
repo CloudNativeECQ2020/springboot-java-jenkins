@@ -55,7 +55,10 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
      sudo systemctl stop jenkins
      usermod -d  /home/jenkins/ jenkins
      sudo systemctl start jenkins
-     ``
+     ```
+4. notify of the new public ip address [jenkinsawspublicip.sh](jenkinsawspublicip.sh)
+
+
      
   
 
