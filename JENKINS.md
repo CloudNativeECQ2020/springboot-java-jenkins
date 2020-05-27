@@ -42,10 +42,14 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
      2. Go to "settings" in the right corner.
      3. Click on "webhooks."
      4. Click "Add webhooks."
-     5. stopping here, need to move jenkins to korra (?) so that it can be accessed by github via url  todo see [jenkins on korra](jenkinsonkorra.md)
-4. set up the build for docker  `springboot-2-dockerize`
+     5. stopping here, need to move jenkins to korra (?) so that it can be accessed by github via url  
+4. set up the build for docker image  `springboot-2-dockerize` script [jenkinsbuildapp.sh](jenkinsbuildapp.sh)
+4. run the image on the jenkins host `springboot-3-run -locally` script [jenkinsbuilddocker.sh](jenkinsbuilddocker.sh)
+4. publish the image in docker hub  `springboot-4-publish-dockerhub` script [jenkinsrunlocally](jenkinsrunlocally)  uses docker plugin
+4. publish the image on Amazon Electric Container Registry  `springboot-5-image-push-aws-ecr` uses docker plugin and aws credentials
+4. stop the container on aws (service will reload it) `springboot-6-restart-aws-container` script [jenkinsawsstoptorun.sh](jenkinsawsstoptorun.sh)  
 
-     
+todo see [jenkins on korra](jenkinsonkorra.md)
 # original test
 ## load jenkins
 load the web page
