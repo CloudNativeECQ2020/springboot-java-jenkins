@@ -56,7 +56,7 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
      usermod -d  /home/jenkins/ jenkins
      sudo systemctl start jenkins
      ```
-4. notify of the new public ip address [jenkinsawspublicip.sh](jenkinsawspublicip.sh)
+4. notify of the new public ip address `springboot-7-notify-email`  script [jenkinsawspublicip.sh](jenkinsawspublicip.sh)also [sleep.sh](sleep.sh) need to delay running this as the repull & run triggered by stopping the container takes a while to start up and to assign public ip
 
 
      
