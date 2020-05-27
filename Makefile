@@ -93,9 +93,9 @@ ecrrepo: ## show ECR repo info
 # note different output defaults to json on centos, not ubuntu
 # exact same version, build etc of aws cli
 PARM=$(shell (aws ecs list-tasks --cluster $ECSCLUSTER) --output json| jq -r '.taskArns[]'))
-TASK=$(shell aws ecs list-tasks --cluster ${ECSCLUSTER} --output json| jq -r ".taskArns[]")
+TASK=$(shell /usr/local/bin/aws ecs list-tasks --cluster ${ECSCLUSTER} --output json| jq -r ".taskArns[]")
 ecsrestart: ## stop  the task after image updated, will auto pull & reload image
-	aws ecs stop-task --cluster $(ECSCLUSTER) --task "${TASK}"
+	/usr/local/bin/aws ecs stop-task --cluster $(ECSCLUSTER) --task "${TASK}"
 
 
 #	@echo PARM $(PARM) 
