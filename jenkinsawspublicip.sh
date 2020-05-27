@@ -13,9 +13,9 @@ email="pcampbell@dawsoncollege.qc.ca"
 FN=$(date +%F-h%H-m%M).reload.container.txt
 
 echo all:
-/usr/local/bin/ecs-cli ps --cluster springbootj-fargate >/tmp/$FN
+ecs-cli ps --cluster springbootj-fargate >/tmp/$FN
 
-running=$(/usr/local/bin/ecs-cli ps --cluster springbootj-fargate|grep RUNNING)
+running=$(ecs-cli ps --cluster springbootj-fargate|grep RUNNING)
 
 ip=$(echo $running |cut -f 3 -d " "|sed s/\-\>.*//)
 
