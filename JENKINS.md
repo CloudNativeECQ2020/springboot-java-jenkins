@@ -47,7 +47,17 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
 4. run the image on the jenkins host `springboot-3-run -locally` script [jenkinsbuilddocker.sh](jenkinsbuilddocker.sh)
 4. publish the image in docker hub  `springboot-4-publish-dockerhub` script [jenkinsrunlocally](jenkinsrunlocally)  uses docker plugin
 4. publish the image on Amazon Electric Container Registry  `springboot-5-image-push-aws-ecr` uses docker plugin and aws credentials
-4. stop the container on aws (service will reload it) `springboot-6-restart-aws-container` script [jenkinsawsstoptorun.sh](jenkinsawsstoptorun.sh)  
+4. stop the container on aws (service will reload it) `springboot-6-restart-aws-container` script [jenkinsawsstoptorun.sh](jenkinsawsstoptorun.sh)        to do this I had to give the user jenkins aws credentials (jenkins userid runs jenkins) so I did the following (I had previously run aws configure to test using aws at the command line)
+     ```
+     mkdir /home/jenkins
+     chown -R jenkins:jenkins /home/jenkins
+     cp -R ~/.aws	/home/jenkins   #(I ran aws config as myself to test things)
+     sudo systemctl stop jenkins
+     usermod -d  /home/jenkins/ jenkins
+     sudo systemctl start jenkins
+     ``
+     
+  
 
 todo see [jenkins on korra](jenkinsonkorra.md)
 # original test
