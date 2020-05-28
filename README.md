@@ -4,7 +4,11 @@ Original is here https://github.com/campbe13/docker-ecq2020/tree/master/springbo
 
 Using this repo for a CI/CD lab, so it has to be in it's own repo here
 
-See [using jenkins](JENKINS.md) for the process
+# See [using jenkins](JENKINS.md) for the process
+
+
+# Below is the original readme from https://github.com/campbe13/docker-ecq2020/tree/master/springboot-java
+
 ## app info
 This is an hello world type of app, not complex. 
 

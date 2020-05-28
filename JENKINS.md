@@ -31,9 +31,10 @@ May 01 21:34:42 acerubuntu1804 su[1968]: pam_unix(su:session): session opened fo
 May 01 21:34:44 acerubuntu1804 jenkins[1399]:    ...done.
 May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot time.
 ```
-## set up pipeline
+## set up pipeline  local ubuntu box & [korra](http://korra.dawsoncollege.qc.ca:8080/)
+These steps were tested on a local box that has no external incomming access.  I wanted to make sure it worked on a local box before moving it.  This must be triggered manually on the local box, by a push to github on korra. 
 1. load the web page
-2. set up build for the app (maven)   `springboot-1-build`
+2. set up build for the app (maven)   `springboot-1-build` [jenkinsbuildapp.sh](jenkinsbuildapp.sh)
      1. repo https://github.com/CloudNativeECQ2020/springboot-java-jenkins.git
      2. set up github creds (not sure where used
      3. tested build, works  (run build on project page
@@ -43,10 +44,12 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
      3. Click on "webhooks."
      4. Click "Add webhooks."
      5. stopping here, need to move jenkins to korra (?) so that it can be accessed by github via url  
-4. set up the build for docker image  `springboot-2-dockerize` script [jenkinsbuildapp.sh](jenkinsbuildapp.sh)
-4. run the image on the jenkins host `springboot-3-run -locally` script [jenkinsbuilddocker.sh](jenkinsbuilddocker.sh)
-4. publish the image in docker hub  `springboot-4-publish-dockerhub` script [jenkinsrunlocally](jenkinsrunlocally)  uses docker plugin
-4. publish the image on Amazon Electric Container Registry  `springboot-5-image-push-aws-ecr` uses docker plugin and aws credentials
+4. set up the build for docker image  `springboot-2-dockerize` script [jenkinsbuilddocker.sh](jenkinsbuilddocker.sh)
+4. run the image on the jenkins host `springboot-3-run -locally` script [jenkinsrunlocally.sh](jenkinsrunlocally)  uses docker plugin
+## set up pipeline korra
+The next steps were only done on korra which is an externally accessible computer so the incomming trigger could be added.  
+4. publish the image in docker hub  `springboot-4-publish-dockerhub` script  [jenkinsdockerpublish.sh](jenkinsdockerpublish.sh)  uses docker plugin
+4. publish the image on Amazon Electric Container Registry  `springboot-5-image-push-aws-ecr` uses docker plugin and aws credentials no script
 4. stop the container on aws (service will reload it) `springboot-6-restart-aws-container` script [jenkinsawsstoptorun.sh](jenkinsawsstoptorun.sh)        to do this I had to give the user jenkins aws credentials (jenkins userid runs jenkins) so I did the following (I had previously run aws configure to test using aws at the command line)
      ```
      mkdir /home/jenkins
@@ -56,7 +59,7 @@ May 01 21:34:44 acerubuntu1804 systemd[1]: Started LSB: Start Jenkins at boot ti
      usermod -d  /home/jenkins/ jenkins
      sudo systemctl start jenkins
      ```
-4. notify of the new public ip address `springboot-7-notify-email`  script [jenkinsawspublicip.sh](jenkinsawspublicip.sh)also [sleep.sh](sleep.sh) need to delay running this as the repull & run triggered by stopping the container takes a while to start up and to assign public ip
+4. notify of the new public ip address `springboot-7-notify-email`  script [jenkinsawspublicip.sh](jenkinsawspublicip.sh)also [sleeping.sh](sleeping.sh) need to delay running this as the repull & run triggered by stopping the container takes a while to start up and to assign public ip
 
 
      
