@@ -25,7 +25,7 @@ public class Application {
 		+display_date 
 		+ "<h3>" + getIPHost() + "</h3>" 
 		+ "<br><h2> AWS deploy success </h2>"
-		+ "<br><h2> AWS ECR (load image after update) succsess </h2>";
+		+ "<br><h2> AWS ECR (load image after update) success </h2>";
 
   }
   public static void main(String[] args) {
